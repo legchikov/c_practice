@@ -4,7 +4,9 @@
 using namespace std;
 
 void append(int data);
+void remove(int value);
 void display();
+int length();
 bool is_empty();
 void is_empty_message();
 
@@ -20,45 +22,80 @@ int main(){
     cout << "Linked List:" << endl;
 
     is_empty_message();
+    cout << "Length of list: " << length() << endl;
 
     append(1);
     append(2);
     append(5);
+    append(10);
     display();
-    
+    remove(2);
+    remove(1);
+    remove(5);
+    display();
+
     is_empty_message();
-    
+    cout << "Length of list: " << length() << endl;
+
     cin.clear();
     cin.get();
     return 0;    
 }
 
-void display(){
-    struct node *ptr = head;
+void append(int data){
+    struct node *new_node = (struct node*) malloc(sizeof(struct node));
+    new_node->data = data;
+    new_node->next = NULL;
 
-    while(ptr != NULL){
-        cout << "[" <<ptr->data << "] --> ";
-        ptr = ptr->next;
+    if(head == NULL){
+        head = new_node;
+        return;
+    }
+
+    struct node *current = head;
+    while(current->next != NULL)
+        current = current->next;
+
+    current->next = new_node;
+}
+
+void remove(int value){
+    struct node *current = head;
+    struct node *prev = NULL;
+
+    while(current != NULL){
+        if(current->data == value){
+            if(prev == NULL)
+                head = current->next;
+            else 
+                prev->next = current->next;
+            return;
+        } else {
+            prev = current;
+            current = current->next;
+        } 
+    }
+}
+
+void display(){
+    struct node *current = head;
+
+    while(current != NULL){
+        cout << "[" <<current->data << "] --> ";
+        current = current->next;
     }
     cout << "[NULL]" << endl;
 }
 
-void append(int data){
-    struct node *link = (struct node*) malloc(sizeof(struct node));
-    link->data = data;
-    link->next = NULL;
-
-    if(head == NULL){
-        head = link;
-        return;
-    }
-    
+int length(){
     struct node *current = head;
+    int length = 0;
 
-    while(current->next != NULL){
+    while(current != NULL){
+        length++;
         current = current->next;
     }
-    current->next = link;
+    return length;
 }
 
 void is_empty_message(){
