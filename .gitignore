@@ -1,4 +1,12 @@
+# Ignore all
+*
+
+# Ignore all with extensions
+!*.*
+
+# Ignore temp files
 *~
+
 # Compiled Object files
 *.slo
 *.lo
