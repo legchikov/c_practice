@@ -3,6 +3,8 @@
 
 # Ignore all with extensions
 !*.*
+!books/
+!.pdf
 
 # Ignore temp files
 *~
