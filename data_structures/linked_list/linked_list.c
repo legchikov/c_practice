@@ -1,10 +1,9 @@
-#include <iostream>
+#include <stdio.h>
 #include <stdlib.h>
-
-using namespace std;
+#include <stdbool.h>
 
 void append(int data);
-void remove(int value);
+void delete(int value);
 void display();
 int length();
 bool is_empty();
@@ -19,27 +18,26 @@ struct node *head = NULL;
 struct node *next = NULL;
 
 int main(){
-    cout << "Linked List:" << endl;
+    printf("Linked List:");
 
     is_empty_message();
-    cout << "Length of list: " << length() << endl;
+    printf("Length of list: %d\n", length());
 
     append(1);
     append(2);
     append(5);
     append(10);
     display();
-    remove(2);
-    remove(1);
-    remove(5);
+    printf("Length of list: %d\n", length());
+    delete(2);
+    delete(1);
+    delete(5);
     display();
 
     is_empty_message();
-    cout << "Length of list: " << length() << endl;
+    printf("Length of list: %d\n", length());
 
-    cin.clear();
-    cin.get();
-    return 0;    
+    return 0;
 }
 
 void append(int data){
@@ -59,7 +57,7 @@ void append(int data){
     current->next = new_node;
 }
 
-void remove(int value){
+void delete(int value){
     struct node *current = head;
     struct node *prev = NULL;
 
@@ -67,13 +65,13 @@ void remove(int value){
         if(current->data == value){
             if(prev == NULL)
                 head = current->next;
-            else 
+            else
                 prev->next = current->next;
             return;
         } else {
             prev = current;
             current = current->next;
-        } 
+        }
     }
 }
 
@@ -81,11 +79,11 @@ void display(){
     struct node *current = head;
 
     while(current != NULL){
-        cout << "[" <<current->data << "] --> ";
+        printf("[ %d ] --> \n", current->data);
         current = current->next;
     }
-    cout << "[NULL]" << endl;
-}
+    printf("[NULL]\n");
+    }
 
 int length(){
     struct node *current = head;
@@ -100,9 +98,9 @@ int length(){
 
 void is_empty_message(){
     if(is_empty()){
-        cout << "List is empty" << endl;
+        printf("List is empty\n");
     } else {
-        cout << "List is not empty" << endl;
+        printf("List is not empty\n");
     }
 }
 
