@@ -1,4 +1,14 @@
+# Ignore all
+*
+
+# Ignore all with extensions
+!*.*
+!books/
+!.pdf
+
+# Ignore temp files
 *~
+
 # Compiled Object files
 *.slo
 *.lo
