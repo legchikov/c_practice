@@ -3,9 +3,9 @@
 
 int main(){
   int v = 3;
-  printf("Code is at  %p\n", (void *)main);
-  printf("Heap is at  %p\n", malloc(8));
-  printf("Stack is at %p\n", (void *)&v);
+  printf("[1]Code is at  %p\n", (void *)main);
+  printf("[2]Heap is at  %p\n", malloc(8));
+  printf("[3]Stack is at %p\n", (void *)&v);
 
   return 0;
 }
@@ -14,15 +14,15 @@ int main(){
 
 Memory organisation:
 +---------+
-|  Code   |
+|  Code   |   [1]
 +---------+
-|  Heap   |
+|  Heap   |   [2]
 +---------+
 | / / / / |
 | /Free / |
 | / / / / |
 +---------+
-|  Stack  |
+|  Stack  |   [3]
 +---------+
 
 */

@@ -28,8 +28,8 @@ int main(){
   printf("p_array_2[0]:  %d\n", p_array_2[0]);
 
   int i;
-  for(i=0; i>-20000; i-=100){
-    printf("p_array_1[%d]:  %d\n", i, p_array_1[-i]);
-  }
+  for(i=0; i<20000; i+=100)
+    printf("p_array_1[%d]:  %d\n", i, p_array_1[i]);
+
   return 0;
 }
