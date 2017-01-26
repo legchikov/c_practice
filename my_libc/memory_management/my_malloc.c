@@ -1,3 +1,5 @@
+/* From K&R book */
+
 #include <stdio.h>
 
 typedef long Align; /* for aling to long boundary */

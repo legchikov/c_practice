@@ -1,4 +1,4 @@
-# Ignore all with extensions
+  # Ignore all with extensions
 !*.*
 !books/
 !.pdf
