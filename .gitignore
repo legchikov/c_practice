@@ -1,6 +1,3 @@
-# Ignore all
-*
-
 # Ignore all with extensions
 !*.*
 !books/
