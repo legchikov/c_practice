@@ -1,7 +1,7 @@
 #include "square.h"
 
 int main(){
-  square(5);
+    square(5);
 
-  return 0;
+    return 0;
 }
