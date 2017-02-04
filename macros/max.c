@@ -1,6 +1,10 @@
 #include <stdio.h>
 
-#define MAX(a, b, c) (((a > b)) ? (c = a) : (c = b))
+#define MAX(a, b, c) {\
+						int _a = (a); \
+						int _b = (b); \
+						(_a > _b) ? (c = _a) : (c = _b);\
+					 }
 
 int main(int argc, char const *argv[]) {
     int a = 10;
@@ -13,7 +17,7 @@ int main(int argc, char const *argv[]) {
     MAX(a+=b, b, c);
     printf("a=%d, c=%d\n", a, c);
 
-    MAX(a++, b, c);
+    MAX(++a, b, c);
     printf("a=%d, c=%d\n", a, c);
 
     return 0;

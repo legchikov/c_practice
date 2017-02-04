@@ -1,20 +1,24 @@
-1. Компилятор вызывает только препроцессор
-  $gcc -E square.c -o square_preprocessed.c
-  $gcc -E main.c -o main_preprocessed.c
+1. Компилятор вызывает только препроцессор:
+    $gcc -E square.c -o square_preprocessed.c
+    $gcc -E main.c -o main_preprocessed.c
 
-2. Непосредственно компиляций. на выходе получаются файлы с расширением .o
-  $gcc square.c
-  $gcc main.c
+2. Непосредственно компиляций. на выходе получаются файлы с расширением .o:
+    $gcc square.c
+    $gcc main.c
 
-3. Сборка объектныйх файлов в один исполняемый
-  $gcc square.o main.o -o program
+3. Сборка объектныйх файлов в один исполняемый:
+    $gcc square.o main.o -o program
 
 4. Запуск программы
-  $./program
+    $./program
 
 gcc - это обертка над компилятором, препроцессором и линковщиком,
-можно сразу собрать программу из искодного кода
-  $gcc square.c main.c -o program
+можно сразу собрать программу из искодного кода:
+    $gcc square.c main.c -o program
 
-Сгенерировать ассемблерный код
-  $gcc -S square.c
+Сгенерировать ассемблерный код:
+    $gcc -S square.c
+
+Программа objdump позволяет посмотреть информациюоб объектном файле.
+Например, дизассемблирование исполняемого файла:
+    $objdump -d main.o
