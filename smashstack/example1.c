@@ -1,5 +1,5 @@
 /* http://insecure.org/stf/smashstack.html */
-/* $gcc -S -o example1.s example1.c */
+/* $gcc -S -o assemble/example1.s example1.c */
 
 void function(int a, int b, int c) {
    char buffer1[5];
