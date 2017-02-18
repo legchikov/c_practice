@@ -8,7 +8,7 @@ void function(int a, int b, int c){
     int *ret;
 
     ret = buffer1 + 12;
-    (*ret) += 7;
+    (*ret) += 8;
 }
 
 int main(){
