@@ -1,29 +1,41 @@
 #include <stdio.h>
-#define SIZE 3
-#define SHIFT 1
+#include <time.h>
 
-void array_shift(int *arr, int size, int shift){
-    int tmp, i;
-    tmp = arr[shift % size];
 
-    for (i = 0; i < size-1; i++) {
-        arr[(i + shift) % size] = arr[i];
-    }
-    arr[shift % size] = tmp;
+void left_rotate_by_one(int *arr, int size){
+    int tmp = arr[0];
+    int i;
+    for (i = 0; i < size - 1; i++)
+        arr[i] = arr[i + 1];
+    arr[size - 1] = tmp;
 }
 
-void printArray(int *arr, int size){
-  int i;
-  for(i = 0; i < size; i++)
-    printf("%d ", arr[i]);
+void left_rotate(int *arr, int size, int shift){
+    shift %= size;
+    int i;
+    for (i = 0; i < shift; i++)
+        left_rotate_by_one(arr, size);
+}
+
+void print_array(int *arr, int size){
+    int i;
+    for(i = 0; i < size; i++)
+        printf("%d ", arr[i]);
 }
 
 int main(int argc, char const *argv[]) {
-    int array[SIZE] = {0, 1, 2};
+    int array[] = {0, 1, 2, 4};
+    int SIZE = sizeof(array) / sizeof(int);
+    int SHIFT = 555555555;
 
-    printArray(array, SIZE);
-    array_shift(array, SIZE, SHIFT);
-    printArray(array, SIZE);
+    print_array(array, SIZE);
+    clock_t begin = clock();
+    left_rotate(array, SIZE, SHIFT);
+    clock_t end = clock();
+
+    printf("\nSHIFT --> [%d]\n", SHIFT);
+    print_array(array, SIZE);
+    printf("\n\nExecution time: %f\n", (double)(end - begin) / CLOCKS_PER_SEC);
 
     return 0;
 }
