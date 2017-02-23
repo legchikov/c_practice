@@ -4,22 +4,30 @@
 
 void left_rotate_by_one(int *arr, int size);
 void left_rotate(int *arr, int size, int shift);
-void create_array(int *buf, int count);
+void left_rotate_2(int *arr, int size, int shift);
+void create_array(int *buf, int size);
 void print_array(int *arr, int size);
+double get_time(clock_t begin, clock_t end);
 
 int main(int argc, char const *argv[]) {
-    int array[50000] = {0};
-    create_array(array, 50000);
-    int SIZE = sizeof(array) / sizeof(int);
-    int SHIFT = 30000;
+    int const SIZE = 50000;
+    int const SHIFT = 30000;
+    clock_t begin;
+    clock_t end;
+    int array[SIZE];
+    create_array(array, SIZE);
 
-    //print_array(array, SIZE);
-    clock_t begin = clock();
+    printf("\nShift = %d\n", SHIFT);
+
+    begin = clock();
     left_rotate(array, SIZE, SHIFT);
-    clock_t end = clock();
-    printf("\nSHIFT --> [%d]\n", SHIFT);
-    //print_array(array, SIZE);
-    printf("\n\nExecution time: %f seconds.\n", (double)(end - begin) / CLOCKS_PER_SEC);
+    end = clock();
+    printf("\nExecution time [left_rotate]: %f seconds.\n", get_time(begin, end));
+
+    begin = clock();
+    left_rotate_2(array, SIZE, SHIFT);
+    end = clock();
+    printf("\nExecution time [left_rotate_2]: %f seconds.\n", get_time(begin, end));
 
     return 0;
 }
@@ -33,7 +41,8 @@ void left_rotate_by_one(int *arr, int size){
     arr[size - 1] = tmp;
 }
 
-// Complexity: O(size * shift)
+// Time complexity: O(size * shift)
+// Space: O(1)
 void left_rotate(int *arr, int size, int shift){
     shift %= size;
     int i;
@@ -41,9 +50,21 @@ void left_rotate(int *arr, int size, int shift){
         left_rotate_by_one(arr, size);
 }
 
-void create_array(int *buf, int count) {
+// Time complexity: O(size)
+// Space: O(size)
+void left_rotate_2(int *arr, int size, int shift){
+    shift %= size;
+    int arr_copy[size];
     int i;
-    for(i = 0; i < count; ++i)
+    for (i = 0; i < size; i++)
+        arr_copy[i] = arr[i];
+    for (i = 0; i < size; i++)
+        arr[i] = arr_copy[(i + shift) % size];
+}
+
+void create_array(int *buf, int size) {
+    int i;
+    for(i = 0; i < size; ++i)
         buf[i] = i;
 }
 
@@ -51,4 +72,7 @@ void print_array(int *arr, int size){
     int i;
     for(i = 0; i < size; i++)
         printf("%d ", arr[i]);
+}
+double get_time(clock_t begin, clock_t end){
+    return (double)(end - begin) / CLOCKS_PER_SEC;
 }
