@@ -4,9 +4,9 @@
 int main(int argc, char const *argv[]) {
     int m[SIZE] = {}; // Изначально заполнен нулями
     //          &m[0]         &m[9]
-    int i;
-
     printf("array 1:\n");
+
+    int i;
     for (i = 0; i < SIZE; i++)
         printf("%d ", m[i]);
 

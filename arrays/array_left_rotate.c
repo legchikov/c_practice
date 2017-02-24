@@ -1,17 +1,19 @@
 #include <stdio.h>
-#include <time.h>
 #include <stdlib.h>
+#include <time.h>
 
 void left_rotate_by_one(int *arr, int size);
 void left_rotate(int *arr, int size, int shift);
 void left_rotate_2(int *arr, int size, int shift);
+void left_rotate_3(int *arr, int size, int shift);
 void create_array(int *buf, int size);
+void reverse_array(int *arr, int start_index, int end_index);
 void print_array(int *arr, int size);
-double get_time(clock_t begin, clock_t end);
+double runtime(clock_t begin, clock_t end);
 
 int main(int argc, char const *argv[]) {
-    int const SIZE = 50000;
-    int const SHIFT = 30000;
+    int const SIZE = 10;
+    int const SHIFT = 3;
     clock_t begin;
     clock_t end;
     int array[SIZE];
@@ -19,15 +21,25 @@ int main(int argc, char const *argv[]) {
 
     printf("\nShift = %d\n", SHIFT);
 
+    print_array(array, SIZE);
+
     begin = clock();
     left_rotate(array, SIZE, SHIFT);
     end = clock();
-    printf("\nExecution time [left_rotate]: %f seconds.\n", get_time(begin, end));
+    printf("\nExecution time [left_rotate]: %f seconds.\n", runtime(begin, end));
+    print_array(array, SIZE);
 
     begin = clock();
     left_rotate_2(array, SIZE, SHIFT);
     end = clock();
-    printf("\nExecution time [left_rotate_2]: %f seconds.\n", get_time(begin, end));
+    printf("\nExecution time [left_rotate_2]: %f seconds.\n", runtime(begin, end));
+    print_array(array, SIZE);
+
+    begin = clock();
+    left_rotate_3(array, SIZE, SHIFT);
+    end = clock();
+    printf("\nExecution time [left_rotate_3]: %f seconds.\n", runtime(begin, end));
+    print_array(array, SIZE);
 
     return 0;
 }
@@ -62,10 +74,26 @@ void left_rotate_2(int *arr, int size, int shift){
         arr[i] = arr_copy[(i + shift) % size];
 }
 
+void left_rotate_3(int *arr, int size, int shift){
+    reverse_array(arr, 0, shift-1);
+    reverse_array(arr, shift, size-1);
+    reverse_array(arr, 0, size-1);
+}
+
 void create_array(int *buf, int size) {
     int i;
     for(i = 0; i < size; ++i)
         buf[i] = i;
+}
+
+void reverse_array(int *arr, int start, int end){
+    int tmp;
+    while(start < end){
+        tmp = arr[start];
+        arr[start] = arr[end];
+        arr[end] = tmp;
+        start++, end--;
+    }
 }
 
 void print_array(int *arr, int size){
@@ -73,6 +101,6 @@ void print_array(int *arr, int size){
     for(i = 0; i < size; i++)
         printf("%d ", arr[i]);
 }
-double get_time(clock_t begin, clock_t end){
+double runtime(clock_t begin, clock_t end){
     return (double)(end - begin) / CLOCKS_PER_SEC;
 }
